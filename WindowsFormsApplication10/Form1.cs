@@ -22,7 +22,7 @@ namespace WindowsFormsApplication10
             InitializeComponent();
         }
 
-        private async Task<string> DownloadRepoInfoAsync(string username)
+        private async Task<string> RequestRepoInfoAsync(string username)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://api.github.com/");
@@ -35,7 +35,7 @@ namespace WindowsFormsApplication10
         private async void button1_Click(object sender, EventArgs e)
         {
             lstRepoResults.Items.Clear();
-            string responseBody = await DownloadRepoInfoAsync(txtUserId.Text);
+            string responseBody = await RequestRepoInfoAsync(txtUserId.Text);
             var jsonResponse = JsonConvert.DeserializeObject(responseBody);
             dynamic responseDynamic = ((Newtonsoft.Json.Linq.JArray)jsonResponse);
 
